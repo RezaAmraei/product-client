@@ -9,14 +9,18 @@ export default () => {
   useEffect(() => {
     axios
       .get("http://localhost:8000/api/products")
-      .then((res) =>
-        setProducts(res.data).catch((err) => console.log(`error : ${err}`))
-      );
+      .then((res) => setProducts(res.data))
+      .catch((err) => console.log(`error : ${err}`));
   }, [render]);
+
+  const removeFromDom = (productId) => {
+    setProducts(products.filter((product) => product._id != productId));
+  };
   return (
     <div>
+      {JSON.stringify(render)}
       <Form setRender={setRender} render={render} />
-      <ProductList products={products} />
+      <ProductList products={products} removeFromDom={removeFromDom} />
     </div>
   );
 };

@@ -4,11 +4,13 @@ import axios from "axios";
 const Form = (props) => {
   const [title, setTitle] = useState("");
   const [price, setPrice] = useState(0);
-  const [description, setDescription] = useState();
+  const [description, setDescription] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    props.setRender(props.render + 1);
+    let newRender = props.render;
+    console.log(newRender);
+    props.setRender(newRender + 1);
     axios
       .post("http://localhost:8000/api/products", {
         title,
@@ -18,6 +20,7 @@ const Form = (props) => {
       .then((res) => console.log(res))
       .catch((err) => console.log(err));
   };
+
   return (
     <form onSubmit={handleSubmit}>
       <p>
