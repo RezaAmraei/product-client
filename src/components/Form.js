@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
-const Form = () => {
+const Form = (props) => {
   const [title, setTitle] = useState("");
   const [price, setPrice] = useState(0);
   const [description, setDescription] = useState();
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    props.setRender(props.render + 1);
     axios
       .post("http://localhost:8000/api/products", {
         title,
